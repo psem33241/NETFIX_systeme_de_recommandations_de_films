@@ -9,7 +9,6 @@ import os
 import ast  
 import base64  
 import re
-import gdown
 
 # Configuration de la page  
 st.set_page_config(page_title="NETFIX Movies", layout="wide", initial_sidebar_state="expanded")
