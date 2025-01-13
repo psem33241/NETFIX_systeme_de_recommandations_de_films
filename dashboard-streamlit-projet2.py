@@ -38,10 +38,6 @@ def load_data():
 
 df_reco, df = load_data()
 
-    except Exception as e:
-        st.error(f"Erreur lors du chargement des données : {str(e)}")
-        return None, None
-
 # Chargement des données
 df_reco, df = load_data()
 
