@@ -166,14 +166,29 @@ def navigation():
 def afficher_affiche(poster_path, size=300):
     try:
         if isinstance(poster_path, str) and poster_path:
+            # Vérifiez si le chemin de l'affiche commence par "http"
             if not poster_path.startswith("http"):
                 poster_path = f"https://image.tmdb.org/t/p/w500{poster_path}"
+                
+            # Effectuez la requête GET  
             response = requests.get(poster_path, timeout=5)
             response.raise_for_status()
-            img = Image.open(BytesIO(response.content))
-            return img
+
+            # Vérifiez si le contenu est de type image  
+            if 'image' in response.headers.get('Content-Type', ''):
+                img = Image.open(BytesIO(response.content))
+                return img  
+            else:
+                st.warning("Le contenu récupéré n'est pas une image.")
+                return None
+
+    except requests.exceptions.RequestException as req_err:
+        st.warning(f"Erreur lors de la requête : {str(req_err)}")
+    except IOError as io_err:
+        st.warning(f"Erreur lors de l'ouverture de l'image : {str(io_err)}")
     except Exception as e:
-        st.warning(f"Erreur lors du chargement de l'affiche : {str(e)}")
+        st.warning(f"Erreur inattendue : {str(e)}")
+    
     return None
 
 def extraire_youtube_id(url):
