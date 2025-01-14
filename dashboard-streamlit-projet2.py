@@ -11,7 +11,7 @@ import base64
 import re
 
 # Configuration de la page  
-st.set_page_config(page_title="NETFIX Movies", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="NETFIX Movies", page_icon=":movie_camera:", layout="wide", initial_sidebar_state="expanded", theme="dark")
 
 # Chargement des données avec compression et colonnes spécifiques
 @st.cache_data(ttl=3600)  # Cache d'une heure
